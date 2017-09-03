@@ -42,10 +42,11 @@ const middle2 = (req, res, next) => {
   console.log("--------------------- middle2")
   console.log('res.locals: ', res.locals)
   console.log('req.locals:', req.locals)
-  res.send("Coming from middle2")
+  next()
 }
 
 app.get('/callback', middle1, middle2, (req, res, next) => {
+  console.log("##############################################")
   console.log(req.query)
   request.post({ url:"https://github.com/login/oauth/access_token", 
    form: githubPostParams(req.query.code)}, 
