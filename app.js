@@ -51,7 +51,8 @@ app.get('/callback', middle1, middle2, (req, res, next) => {
   request.post({ url:"https://github.com/login/oauth/access_token", 
    form: githubPostParams(req.query.code)}, 
    (err, httpResponse, body) => {
-      console.log("Body: ", body.split("=").split('&'))
+      const stringSplit = body.split("=")
+      console.log(stringSplit)
       console.log(httpResponse)
       res.locals.accesscode = body
    }
