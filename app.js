@@ -57,7 +57,12 @@ app.get('/callback', middle1, middle2, (req, res, next) => {
       res.locals.accesscode = body
    }
   )
-  res.send("this is the end")
+
+  const data = request.get({url: "https://api.github.com/user?"+req.query.body}, 
+    (err, httpResponse, body) => {
+      return body
+    })
+  res.send(data)
 });
 
 app.get('/redirected', (req, res) => {
