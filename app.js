@@ -33,24 +33,30 @@ app.get('/', (req, res) => {
 
 const middle1 = (req, res, next) => {
   console.log("===================== middle1")
+  console.log('res.locals: ', res.locals)
+  console.log('req.locals:', req.locals)
   next() 
 }
 
 const middle2 = (req, res, next) => {
   console.log("--------------------- middle2")
+  console.log('res.locals: ', res.locals)
+  console.log('req.locals:', req.locals)
   res.send("Coming from middle2")
 }
 
-app.get('/callback', (req, res, next) => {
+app.get('/callback', middle1, middle2, (req, res, next) => {
   console.log(req.query)
   request.post({ url:"https://github.com/login/oauth/access_token", 
    form: githubPostParams(req.query.code)}, 
    (err, httpResponse, body) => {
-      console.log("Body: ", body)
+      console.log("Body: ", body.split("=").split('&'))
+      console.log(httpResponse)
+      res.locals.accesscode = body
    }
   )
-  next()
-}, middle1, middle2);
+  res.send("this is the end")
+});
 
 app.get('/redirected', (req, res) => {
   console.log("Calling redirected", Object.keys(req))
