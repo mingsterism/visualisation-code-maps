@@ -10,7 +10,6 @@ console.log("Random String -----", rString)
 
 const githubOauthParams = {
   "client_id": "e03a564f48f8a2ed28b4", 
-  //"redirect_uri": "http://54.255.249.246:3000/callback", 
   "redirect_uri": "https://coders-map-visualisation.herokuapp.com/callback",
   "state": rString,
 }
@@ -31,7 +30,16 @@ app.get('/', (req, res) => {
     query: githubOauthParams,
   }))
 })
- 
+
+const middle1 = (req, res, next) => {
+  console.log("===================== middle1")
+  next() 
+}
+
+const middle2 = (req, res, next) => {
+  console.log("--------------------- middle2")
+  res.send("Coming from middle2")
+}
 
 app.get('/callback', (req, res) => {
   console.log(req.query)
@@ -41,8 +49,7 @@ app.get('/callback', (req, res) => {
       console.log("Body: ", body)
    }
   )
-  res.send("")
-});
+}, middle1, middle2);
 
 app.get('/redirected', (req, res) => {
   console.log("Calling redirected", Object.keys(req))
