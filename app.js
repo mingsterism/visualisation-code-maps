@@ -11,7 +11,7 @@ console.log("Random String -----", rString)
 const githubOauthParams = {
   "client_id": "e03a564f48f8a2ed28b4", 
   //"redirect_uri": "http://54.255.249.246:3000/callback", 
-  "redirect_uri": "https://coders-map-visualisation.herokuapp.com/callback"
+  "redirect_uri": "https://coders-map-visualisation.herokuapp.com/callback",
   "state": rString,
 }
 
