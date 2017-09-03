@@ -48,7 +48,7 @@ const middle2 = (req, res, next) => {
 app.get('/callback', middle1, middle2, (req, res, next) => {
   console.log("##############################################")
   console.log(req.body)
-  console.log(Object.keys(req)
+  console.log(Object.keys(req))
   request.post({ url:"https://github.com/login/oauth/access_token", 
    form: githubPostParams(req.query.code)}, 
    (err, httpResponse, body) => {
