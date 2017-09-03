@@ -48,6 +48,6 @@ app.get('/redirected', (req, res) => {
   console.log("Calling redirected", Object.keys(req))
 })
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000")
+app.listen(process.env.PORT || 5000, () => {
+  console.log("Listening on port", process.env.PORT)
 })
