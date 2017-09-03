@@ -49,6 +49,7 @@ app.get('/callback', (req, res) => {
       console.log("Body: ", body)
    }
   )
+  next()
 }, middle1, middle2);
 
 app.get('/redirected', (req, res) => {
